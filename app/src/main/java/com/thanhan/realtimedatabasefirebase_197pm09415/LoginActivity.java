@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         if(auth.getCurrentUser() != null){
-            Toast.makeText(getApplicationContext(), "Đăng nhập thành công!",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Đã đăng nhập thành công!",Toast.LENGTH_LONG).show();
             finish();
         }
         signup.setOnClickListener(new View.OnClickListener() {
