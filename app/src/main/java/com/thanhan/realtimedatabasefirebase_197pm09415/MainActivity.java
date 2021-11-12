@@ -95,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
         else if (item.getItemId()==R.id.menuIntro){
             Toast.makeText(this,"Welcome to my app", Toast.LENGTH_LONG).show();
         }
+        else if (item.getItemId()==R.id.menuSignin){
+            startActivity(new Intent(MainActivity.this,LoginActivity.class));
+            finish();
+        }
         else if (item.getItemId()==R.id.menuSignup){
             startActivity(new Intent(MainActivity.this,RegisterActivity.class));
             finish();

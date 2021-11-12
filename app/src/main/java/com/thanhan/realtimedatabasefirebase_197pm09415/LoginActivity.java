@@ -16,8 +16,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.SignInMethodQueryResult;
 
-public class RegisterActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     EditText email, password;
     Button signup,signin,forget,cancel;
@@ -26,12 +27,23 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_login);
 
         matching();
-
         auth = FirebaseAuth.getInstance();
+
+        if(auth.getCurrentUser() != null){
+            Toast.makeText(getApplicationContext(), "Đăng nhập thành công!",Toast.LENGTH_LONG).show();
+            finish();
+        }
         signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+                finish();
+            }
+        });
+        signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String semail = email.getText().toString().trim();
@@ -48,49 +60,34 @@ public class RegisterActivity extends AppCompatActivity {
                     error.setText("Vui lòng nhập mật khẩu từ 6 kí tự!");
                     return;
                 }
-
-                auth.createUserWithEmailAndPassword(semail,spassword).addOnCompleteListener(RegisterActivity.this,
+                auth.signInWithEmailAndPassword(semail,spassword).addOnCompleteListener(LoginActivity.this,
                         new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (!task.isSuccessful()){
-                                    error.setText(task.getException().toString());
-                                }else {
-                                    Toast.makeText(getApplicationContext(), "Đăng ký thành công!",Toast.LENGTH_LONG).show();
-                                    startActivity(new Intent(RegisterActivity.this,MainActivity.class));
-                                    finish();
-                                }
-                            }
-                        });
-            }
-        });
-        signin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
-                finish();
-            }
-        });
-        forget.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isSuccessful()){
+                            error.setText(task.getException().toString());
+                        }else {
+                            Toast.makeText(getApplicationContext(), "Đăng nhập thành công!",Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                            finish();
+                        }
+                    }
+                });
             }
         });
     }
-
     private void matching() {
-        email = (EditText) findViewById(R.id.register_et_email);
-        password = (EditText) findViewById(R.id.register_et_pass);
-        signup = (Button) findViewById(R.id.register_btn_register);
-        signin = (Button) findViewById(R.id.register_btn_signin);
-        forget = (Button) findViewById(R.id.register_btn_forgetpass);
-        cancel = (Button) findViewById(R.id.register_btn_cancel);
-        error = (TextView) findViewById(R.id.register_tv_error);
+        email = (EditText) findViewById(R.id.login_et_email);
+        password = (EditText) findViewById(R.id.login_et_pass);
+        signup = (Button) findViewById(R.id.login_btn_register);
+        signin = (Button) findViewById(R.id.login_btn_signin);
+        forget = (Button) findViewById(R.id.login_btn_forgetpass);
+        cancel = (Button) findViewById(R.id.login_btn_cancel);
+        error = (TextView) findViewById(R.id.login_tv_error);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+                startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 finish();
             }
         });
