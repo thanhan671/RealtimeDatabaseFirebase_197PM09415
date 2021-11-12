@@ -6,4 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".ForgetPassActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/forget_et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textWebEmailAddress"
+            android:textAlignment="center"
+            android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/forget_tv_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Khôi phục mật khẩu"
+            android:textAlignment="center"
+            android:textColor="#F30808"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/forget_btn_getpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lấy lại mật khẩu"
+            android:textSize="34sp" />
+
+        <Button
+            android:id="@+id/forget_btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hủy"
+            android:textSize="34sp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

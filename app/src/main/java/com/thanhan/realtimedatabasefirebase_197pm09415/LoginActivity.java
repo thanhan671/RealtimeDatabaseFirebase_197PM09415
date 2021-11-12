@@ -75,6 +75,13 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+        forget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,ForgetPassActivity.class));
+                finish();
+            }
+        });
     }
     private void matching() {
         email = (EditText) findViewById(R.id.login_et_email);
